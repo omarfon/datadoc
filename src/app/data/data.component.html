@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title size="small">
+      Bienvenido {{nameDoctor}}
+    </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="closeSesion()">
+        <ion-icon slot="icon-only" name="close-circle" color="danger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form  #addForm [formGroup]="doctorForm" (ngSubmit)="onSaveForm()" novalidate>
+    <ion-row>
+      <ion-col  size="12">
+        <h3 class="textoIndicaciones">Recuerda que los datos que ingreses serán vistos en la página web, en la sección de tu especialidad.</h3>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating" >Frase corta</ion-label>
+          <ion-textarea formControlName="fraseCorta" placeholder="máximo 100 carácteres." rows="3" cols="20" minlength="20" maxlength="100"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Sobre mi</ion-label>
+          <ion-textarea formControlName="fraseExtend" placeholder="máximo 400 carácteres." rows="7" cols="20" minlength="20" maxlength="350"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Formación</ion-label>
+          <ion-textarea formControlName="formacion" placeholder="máximo 200 carácteres." rows="5" cols="20" minlength="20" maxlength="200"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Enfermedades que trato</ion-label>
+          <ion-textarea formControlName="enferquetrato" placeholder="máximo 200 carácteres." rows="5" cols="20" minlength="20" maxlength="200"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">CMP</ion-label>
+          <ion-input formControlName="cmp" type="number"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">RNE</ion-label>
+          <ion-input formControlName="rne" type="number"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button type="submit" expand="full" color="secondary">Guardar</ion-button>
+      </ion-col >
+    </ion-row>
+  </form>
+
+</ion-content>

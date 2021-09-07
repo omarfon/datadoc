@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Login Doctores
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<div id="container">
+
+  <ion-row>
+    <ion-col>
+      <p>Recuerda utilizar las mismas credenciales que en el XHIS</p>
+    </ion-col>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" #email></ion-input>
+      </ion-item>
+    </ion-col>
+   <ion-col size="12">
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input #password type="password"></ion-input>
+      </ion-item>
+    </ion-col> 
+    <ion-col>
+      <ion-button (click)="goToHome(email.value, password.value)" size="full">
+      Login
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</div>
+</ion-content>
