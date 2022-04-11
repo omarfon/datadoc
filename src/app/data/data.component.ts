@@ -23,6 +23,8 @@ export class DataComponent implements OnInit {
   public capa;
   public dataDoctor;
   public dataDoctorGuardada;
+  public edit: boolean = false;
+  public datosGuardados:boolean = false;
   constructor(public upData: UpDataService, public fb: FormBuilder, public router: Router) {
   }
 
@@ -37,22 +39,29 @@ export class DataComponent implements OnInit {
 
   closeSesion(){
     localStorage.clear();
-    this.router.navigate(['/']);
+    this.router.navigate(['login']);
   }
 
   getDataDoctor(){
     const id = JSON.parse(localStorage.getItem('dataDoctor'))
     const idDoctor = id.professionalId;
-    this.upData.getAllDataPerUser(idDoctor).subscribe(data => {
+    this.upData.getDoctorInfo(idDoctor).subscribe(data => {
       this.dataDoctorGuardada = data;
-      console.log(this.dataDoctorGuardada);
+      if(this.dataDoctorGuardada){
+        this.edit = true;
+      }else{
+        this.edit = false;
+      }
+      console.log(this.dataDoctorGuardada, this.datosGuardados);
     })
   }
   
     doctorForm = this.fb.group({
       fraseCorta: new FormControl('', [Validators.minLength(5), Validators.maxLength(400)]),
       fraseExtend: new FormControl('', [Validators.minLength(5)]),
-      formacion: new FormControl(this.formacion, [Validators.minLength(5)]),
+      formacionuno: new FormControl(this.formacion, [Validators.minLength(5)]),
+      formacionDos: new FormControl(this.formacion, [Validators.minLength(5)]),
+      formacionTres: new FormControl(this.formacion, [Validators.minLength(5)]),
       capacitacion: new FormControl(this.capacitacion, [Validators.minLength(5)]),
       enferquetrato: new FormControl('', [Validators.minLength(5)]),
       cmp: new FormControl('', [Validators.minLength(4)]),
@@ -71,22 +80,35 @@ export class DataComponent implements OnInit {
       nombreDoctor: this.dataDoctor.displayName,
       apellidoDoctor: this.dataDoctor.surname1,
       apellidomDoctor: this.dataDoctor.surname2,
-      idDoc: this.dataDoctor.professionalId,
+      professionalId: this.dataDoctor.professionalId,
       user: this.dataDoctor.username,
       savein: new Date(),
       now: moment().format('YYYY-MM-DD'),
-      fraseCorta: datosForm.fraseCorta,
-      fraseExtendida: datosForm.fraseExtend,
-      formacion: datosForm.formacion,
-      capacitacion: datosForm.capacitacion,
+      shortSpeach: datosForm.fraseCorta,
+      longSpeach: datosForm.fraseExtend,
+      professionalTrainings: [{
+        idCenter:0,
+        data:datosForm.formacionUno,
+      },{
+        idCenter:1,
+        data:datosForm.formacionDos,
+      },
+      {
+        idCenter:2,
+        data:datosForm.formacionTres,
+      },
+    ],
       enferquetrato: datosForm.enferquetrato,
       cmp: datosForm.cmp,
       rne: datosForm.rne,
+      stateInfo:'lleno',
       visible: false
     }
       console.log(this.dataEnviada);
 
-    this.upData.updateDataPerUser(this.dataEnviada);
+    this.upData.createSpaceUser(this.dataEnviada).subscribe(data => {
+      console.log(data)
+    });
     Swal.fire('Data Guardada...', 'Listo... acabas de guardar datos de la consulta!', 'success')
     console.log('data enviada:', this.dataEnviada);
     this.doctorForm.reset();

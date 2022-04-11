@@ -2,14 +2,27 @@
  .textoIndicaciones{
     width: 90%;
     margin-left:5%;
-    color:#97a3aa;
+    color:#ffffff;
     margin-top:20px;
     margin-bottom:20px;
     text-align: center;
   }
+  h3{
+    color:fff;
+    font-size:1.1em;
+    font-weight: 500;
+  }
   ion-content{
-    form{
-      width:95%;
-      margin-left: 2.5%;
-    }
+    --background: #20668b;
+/*     background-image: url(../../assets/img/cita_fondo_mobile.jpg); */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
+/*     height: auto; */
+  }
+  ion-button{
+    margin-bottom:30px!important;
+  }
+  .marginb{
+    margin-bottom:30px;
   }

@@ -1,11 +1,14 @@
 #container {
     text-align: center;
-    margin-top: 50%;
+    margin-top: 20%;
     border: 3px solid #E8F0F2;
     border-radius: 20px;
     padding: 50px;
     width:90%;
     margin-left:5%;
+    @media (max-width: 540px) {
+        margin-top:60%;
+    }
   }
   
   #container strong {
@@ -24,4 +27,14 @@
   
   #container a {
     text-decoration: none;
+  }
+  #background-content{
+    --background-color: #20668b;
+    background: url(../../assets/img/cita_fondo_mobile.jpg)!important;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
+    min-height: 100vh;
+    width: 100%;
+    height: 100vh;
   }
